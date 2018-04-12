@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 var express        = require("express"),
     app            = express(),
     bodyParser     = require("body-parser"),
@@ -42,10 +44,10 @@ app.use(function(req, res, next){
     next();
 });
 
-console.log(process.ENV.DATABASEURL);
+// console.log(process.env.DATABASEURL);
 
-// mongoose.connect("mongodb://localhost/yelp_camp_v13");
-mongoose.connect("mongodb://nanguer:tibet@ds259268.mlab.com:59268/yelpcampnanguer");
+mongoose.connect(process.env.DATABASEURL);
+// mongoose.connect("mongodb://nanguer:tibet@ds259268.mlab.com:59268/yelpcampnanguer");
 
 
 app.set("view engine", "ejs");
