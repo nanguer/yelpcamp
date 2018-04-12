@@ -41,7 +41,9 @@ app.use(function(req, res, next){
     next();
 });
 
-mongoose.connect("mongodb://localhost/yelp_camp_v13");
+// mongoose.connect("mongodb://localhost/yelp_camp_v13");
+mongoose.connect("mongodb://nanguer:tibet@ds259268.mlab.com:59268/yelpcampnanguer");
+
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
