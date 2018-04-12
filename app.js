@@ -2,6 +2,7 @@ var express        = require("express"),
     app            = express(),
     bodyParser     = require("body-parser"),
     mongoose       = require("mongoose"),
+    doteEnv        = require('dotenv').config(),
     flash          = require("connect-flash"),
     passport       = require("passport"),
     LocalStrategy  = require("passport-local"),
@@ -41,8 +42,11 @@ app.use(function(req, res, next){
     next();
 });
 
+console.log(process.ENV.DATABASEURL);
+
 // mongoose.connect("mongodb://localhost/yelp_camp_v13");
 mongoose.connect("mongodb://nanguer:tibet@ds259268.mlab.com:59268/yelpcampnanguer");
+
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
