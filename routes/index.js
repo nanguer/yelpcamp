@@ -11,7 +11,7 @@ router.get("/", function(req, res){
 
 //Show register form
 router.get("/register", function(req, res){
-  res.render("register");
+  res.render("register", {page: 'register'});
 });
 
 //handle sign up logic
@@ -33,15 +33,19 @@ router.post("/register", function(req, res) {
 
 //SHOW LOGIN FORM
 router.get("/login", function(req, res){
-   res.render("login");
+   res.render("login", {page:'login'});
 });
 
 //Handle login logic
 router.post("/login", passport.authenticate("local", 
         {
             successRedirect: "/campgrounds",
-            failureRedirect: "/login"
+            successFlash: "Welcome!",
+            failureRedirect: "/login",
+            failureFlash: 'Invalid username or password. Try again...'
+            
         }), function(req, res) {
+            
     
 });
 

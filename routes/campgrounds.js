@@ -11,7 +11,7 @@ router.get("/", function(req, res){
           if(err){
               console.log(err);
           } else {
-              res.render("campgrounds/index", {campgrounds: allCampgrounds, currentUser: req.user});
+              res.render("campgrounds/index", {campgrounds: allCampgrounds, currentUser: req.user, page:'campgrounds'});
           }
     });
 });
@@ -69,8 +69,11 @@ router.get("/:id", function(req, res){
 //EDIT CAMPGROUND ROUTE
 router.get("/:id/edit", middleware.checkCampgroundOwnership, function(req, res) {
           Campground.findById(req.params.id, function(err, foundCampground){
+              if(err){
+                  req.flash("Acces denied");
+              } else {
                 res.render("campgrounds/edit", {campground: foundCampground});
-              
+              }
     });
         
 });
