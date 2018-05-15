@@ -44,7 +44,6 @@ app.use(function(req, res, next){
     next();
 });
 
-// console.log(process.env.DATABASEURL);
 
 mongoose.connect(process.env.DATABASEURL);
 // mongoose.connect("mongodb://nanguer:tibet@ds259268.mlab.com:59268/yelpcampnanguer");
