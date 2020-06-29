@@ -62,5 +62,5 @@ app.use("/", indexRoutes);
 
 
 app.listen(process.env.PORT, process.env.IP, function(){
-    console.log("The YelpCamp Server has started!");
+    console.log("The YelpCamp Server has started now!");
 })
