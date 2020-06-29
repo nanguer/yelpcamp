@@ -46,7 +46,7 @@ app.use(function(req, res, next){
 
 
 mongoose.connect(process.env.DATABASEURL);
-// mongoose.connect("mongodb://nanguer:tibet@ds259268.mlab.com:59268/yelpcampnanguer");
+
 
 
 app.set("view engine", "ejs");
