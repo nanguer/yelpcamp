@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import * as actions from "../actions/campgrounds";
-import Campground from "./Campground";
+import * as actions from "../../actions/campgrounds";
 import PropTypes from "prop-types";
+import Preview from "./Preview";
 
 export const AllCampgrounds = ({
   fetchAllCampgrounds,
@@ -18,7 +18,7 @@ export const AllCampgrounds = ({
       <ul>
         {campgrounds.map((campground) => (
           <li key={campground._id}>
-            <Campground
+            <Preview
               campground={campground}
               fetchCampDetails={fetchCampDetails}
             />
@@ -33,7 +33,6 @@ const mapStateToProps = (state) => ({
 });
 const mapActionsToProps = {
   fetchAllCampgrounds: actions.fetchAll,
-  fetchCampDetails: actions.fetchOne,
 };
 
 AllCampgrounds.propTypes = {

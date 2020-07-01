@@ -14,7 +14,6 @@ export const campgrounds = (state = initialState, action) => {
         list: [...action.payload],
       };
     case FETCH_ONE:
-      console.log(action.payload);
       return {
         ...state,
         viewing: { ...action.payload },

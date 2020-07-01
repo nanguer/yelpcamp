@@ -1,4 +1,5 @@
 import api from "./api";
+import { SET_ERROR } from "./types";
 
 export const ACTION_TYPES = {
   CREATE: "CREATE",
@@ -6,6 +7,10 @@ export const ACTION_TYPES = {
   DELETE: "DELETE",
   FETCH_ALL: "FETCH_ALL",
   FETCH_ONE: "FETCH_ONE",
+};
+
+const getItemsFromLocal = (id) => {
+  return JSON.parse(sessionStorage.getItem(id));
 };
 
 export const fetchAll = () => async (dispatch) => {
@@ -18,19 +23,36 @@ export const fetchAll = () => async (dispatch) => {
     });
   } catch (error) {
     console.log(error);
+    dispatch({
+      type: SET_ERROR,
+      payload: error.message,
+    });
   }
 };
 
 export const fetchOne = (id) => async (dispatch) => {
-  try {
-    const res = await api.campground().fetchById(id);
-    console.log(res);
+  const fetchedItem = getItemsFromLocal(id);
+
+  if (!fetchedItem) {
+    try {
+      const res = await api.campground().fetchById(id);
+      dispatch({
+        type: ACTION_TYPES.FETCH_ONE,
+        payload: res.data,
+      });
+      sessionStorage.setItem(id, JSON.stringify(res));
+    } catch (error) {
+      console.log(error);
+      dispatch({
+        type: SET_ERROR,
+        payload: error.message,
+      });
+    }
+  } else {
     dispatch({
       type: ACTION_TYPES.FETCH_ONE,
-      payload: res.data,
+      payload: fetchedItem.data,
     });
-  } catch (error) {
-    console.log(error);
   }
 };
 
