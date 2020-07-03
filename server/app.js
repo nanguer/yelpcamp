@@ -1,4 +1,5 @@
 require('dotenv').config();
+const path = require('path');
 
 var express        = require("express"),
     app            = express(),
@@ -13,15 +14,18 @@ var express        = require("express"),
     Comment        = require("./models/comment"),
     User           = require("./models/user"),
     seedDB         = require("./seeds");
+    cors           = require('cors')
     
 //Requiring routes    
 var commentsRoutes   = require("./routes/comments"),
     campgroundRoutes = require("./routes/campgrounds"),
     indexRoutes      = require("./routes/index");
+const { countReset } = require('console');
 
 
-// seedDB(); //Seed the database
+//seedDB(); //Seed the database
 
+app.use(cors());
 app.use(flash());
 
 //PASSPORT CONFIGURATION
@@ -45,12 +49,14 @@ app.use(function(req, res, next){
 });
 
 
-mongoose.connect(process.env.DATABASEURL);
+mongoose.set("useUnifiedTopology", true);
+mongoose.connect(process.env.DATABASEURL, {useNewUrlParser: true, useCreateIndex:true});
 
 
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 
@@ -58,7 +64,9 @@ app.use("/campgrounds/:id/comments", commentsRoutes);
 app.use("/campgrounds", campgroundRoutes);
 app.use("/", indexRoutes);
 
-
+// app.get("/", function(req, res) {
+//     res.sendFile(path.join(__dirname, '../yelpcamp-react/build', 'index.html'));
+//   });
 
 
 app.listen(process.env.PORT, process.env.IP, function(){

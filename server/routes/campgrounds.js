@@ -15,13 +15,14 @@ var geocoder = NodeGeocoder(options);
 
 //"INDEX" ROUTE -
 router.get("/", function(req, res){
-    console.log(req.user);
+    
     //Get all campgrounds from DB
     Campground.find({}, function(err, allCampgrounds){
           if(err){
+              res.send(err)
               console.log(err);
           } else {
-              res.render("campgrounds/index", {campgrounds: allCampgrounds, currentUser: req.user, page:'campgrounds'});
+              res.json(allCampgrounds)
           }
     });
 });
@@ -37,6 +38,8 @@ router.post("/", middleware.isLoggedIn, function(req, res){
       username: req.user.username
   };
   geocoder.geocode(req.body.location, function (err, data) {
+      console.log(data);
+      
     if (err || !data.length) {
       req.flash('error', 'Invalid address');
       return res.redirect('back');
@@ -51,7 +54,6 @@ router.post("/", middleware.isLoggedIn, function(req, res){
             console.log(err);
         } else {
             //redirect back to campgrounds page
-            console.log(newlyCreated);
             res.redirect("/campgrounds");
         }
     });
@@ -66,21 +68,14 @@ router.get("/new", middleware.isLoggedIn, function(req, res) {
 });
 
 //"SHOW" ROUTE
-router.get("/:id", function(req, res){
-    //find campground with provided id
+router.get("/:id", async function(req, res){
     Campground.findById(req.params.id).populate("comments").exec(function(err, foundCampground){
         if(err){
-                console.log(err);
+                res.status(404).send(err)
             } else {
-                console.log(foundCampground);
-                //render "show" template with that campground
-                    res.render("campgrounds/show", {campground: foundCampground});
+                res.status(200).json(foundCampground)
             }
-        
     });
-   
-    
-    
 });
 
 //EDIT CAMPGROUND ROUTE

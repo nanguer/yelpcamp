@@ -13,21 +13,23 @@ const getItemsFromLocal = (id) => {
   return JSON.parse(sessionStorage.getItem(id));
 };
 
-export const fetchAll = () => async (dispatch) => {
-  try {
-    const res = await api.campground().fetchAll();
-
-    dispatch({
-      type: ACTION_TYPES.FETCH_ALL,
-      payload: res.data,
+export const fetchAll = () => (dispatch) => {
+  api
+    .campground()
+    .fetchAll()
+    .then((res) => {
+      dispatch({
+        type: ACTION_TYPES.FETCH_ALL,
+        payload: res.data,
+      });
+    })
+    .catch((error) => {
+      console.log({ error });
+      dispatch({
+        type: SET_ERROR,
+        payload: error.message,
+      });
     });
-  } catch (error) {
-    console.log(error);
-    dispatch({
-      type: SET_ERROR,
-      payload: error.message,
-    });
-  }
 };
 
 export const fetchOne = (id) => async (dispatch) => {

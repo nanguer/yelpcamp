@@ -5,7 +5,7 @@ const initialState = {
   viewing: {},
 };
 export const campgrounds = (state = initialState, action) => {
-  const { FETCH_ALL, FETCH_ONE, CREATE, UPDATE, DELETE } = ACTION_TYPES;
+  const { FETCH_ALL, FETCH_ONE } = ACTION_TYPES;
 
   switch (action.type) {
     case FETCH_ALL:

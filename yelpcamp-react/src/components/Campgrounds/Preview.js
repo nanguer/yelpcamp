@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Button from "react-bootstrap/Button";
 
 const Preview = ({ campground }) => {
   const { name, image, description, _id: id } = campground;
@@ -10,7 +11,7 @@ const Preview = ({ campground }) => {
       <img src={image} alt="campground" />
       <p>{description}</p>
       <Link to={`campgrounds/${id}`}>
-        <button>More Info</button>
+        <Button variant="info">More Info</Button>
       </Link>
     </div>
   );

@@ -1,7 +1,8 @@
-var express = require("express");
-var router = express.Router();
-var passport = require("passport");
-var User = require("../models/user");
+const express = require("express");
+const router = express.Router();
+const passport = require("passport");
+const User = require("../models/user");
+const validateRegisterInput = require('../validation/register');
 
 //Root route
 router.get("/", function(req, res){
@@ -15,19 +16,25 @@ router.get("/register", function(req, res){
 });
 
 //handle sign up logic
-router.post("/register", function(req, res) {
-      //CREATE NEW USER
-      var newUser = new User({username: req.body.username});
-      User.register(newUser, req.body.password, function(err, user){
+router.post("/register", (req, res) => {
+    const { errors, isValid } = validateRegisterInput(req.body);
+
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+    const newUser = new User({username: req.body.username, email:req.body.email});
+     
+      User.register(newUser, req.body.password, (err, user) => {
         if(err){
-            
-            return res.render("register", {"error": err.message});
-        }
-        //AUTHENTICATE NEW USER
-        passport.authenticate("local")(req, res, function(){
-            req.flash("success", "Welcome to YelpCamp " + user.username);
-            res.redirect("/campgrounds");
+            console.log('theres an error!',err.message)
+            return res.status(400).json({error:err.message})
+        } else {
+            passport.authenticate("local")(req, res, () => {
+            console.log(user)
+            return res.status(200).json({username:user.username, id:user._id})
         });
+        }
+       
     });
 });
 
