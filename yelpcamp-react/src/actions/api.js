@@ -6,7 +6,7 @@ export default {
   campground(url = `${baseUrl}/campgrounds/`) {
     return {
       fetchAll: () => axios.get(url, { crossDomain: true }),
-      fetchById: (id) => axios.get(url + id),
+      fetchById: (id) => axios.get(url + id, { crossDomain: true }),
       create: (newRecord) => axios.post(url, newRecord),
       update: (id, updateRecord) => axios.put(url + id, updateRecord),
       delete: (id) => axios.delete(url + id),

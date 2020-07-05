@@ -7,7 +7,7 @@ import { logoutUser } from "../actions/user";
 import PropTypes from "prop-types";
 
 const Navigation = ({ auth, logoutUser, ...props }) => {
-  const { username } = auth.user;
+  const { name } = auth.user;
   const { isAuthenticated } = auth;
 
   const onLogout = (e) => {
@@ -17,7 +17,7 @@ const Navigation = ({ auth, logoutUser, ...props }) => {
 
   const authLinks = (
     <Nav>
-      <Navbar.Text>Welcome {username} </Navbar.Text>
+      <Navbar.Text>Welcome {name} </Navbar.Text>
       <Nav.Link href="#" eventKey="3" onClick={onLogout}>
         Logout
       </Nav.Link>
@@ -49,7 +49,6 @@ const Navigation = ({ auth, logoutUser, ...props }) => {
 
   return (
     <Navbar collapseOnSelect bg="light" variant="light">
-      <Navbar.Brand href="#home">YelpCamp</Navbar.Brand>
       <Nav.Link
         as={NavLink}
         eventKey="7"
@@ -57,7 +56,7 @@ const Navigation = ({ auth, logoutUser, ...props }) => {
         activeClassName="active pull-left"
         to={"/"}
       >
-        Home
+        YelpCamp
       </Nav.Link>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
