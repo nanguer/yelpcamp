@@ -1,3 +1,17 @@
-@import "node_modules/bootstrap/scss/bootstrap";
 @import "./settings.scss";
-@import "../components/login/UserLogin.scss";
+@import "../components/UserLogin/UserLogin.scss";
+@import "../components/UserRegister/UserRegister.scss";
+@import "../components/Navigation/Navigation.scss";
+@import "../components/Campgrounds/Details.scss";
+
+@font-face {
+  font-family: "Nunito";
+  src: url("../Assets/Fonts/Nunito-Regular.woff2") format("woff2");
+}
+
+//Custom SCSS
+
+$font-family-base: "Nunito";
+$blue: #8274e8;
+$info: #f593ba;
+@import "node_modules/bootstrap/scss/bootstrap";

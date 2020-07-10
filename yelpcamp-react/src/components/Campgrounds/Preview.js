@@ -1,19 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import Col from "react-bootstrap/Col";
 
 const Preview = ({ campground }) => {
-  const { name, image, description, _id: id } = campground;
+  const { name, image, _id: id } = campground;
 
   return (
-    <div>
-      <h6>{name}</h6>
-      <img src={image} alt="campground" />
-      <p>{description}</p>
-      <Link to={`campgrounds/${id}`}>
-        <Button variant="info">More Info</Button>
-      </Link>
-    </div>
+    <Col md="3">
+      <Card>
+        <Card.Img variant="top" src={image} alt="campground" />
+        <Card.Body>
+          <Card.Title>{name}</Card.Title>
+          <Link to={`campgrounds/${id}`}>
+            <Button variant="info">More Info</Button>
+          </Link>
+        </Card.Body>
+      </Card>
+    </Col>
   );
 };
 

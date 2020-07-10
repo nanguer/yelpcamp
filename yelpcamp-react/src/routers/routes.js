@@ -1,21 +1,35 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import Detail from "../components/Campgrounds/Details";
-import AllCamps from "../components/Campgrounds/AllCamps";
-import UserLogin from "../components/login/UserLogin";
-import UserRegister from "../components/login/UserRegister";
+import SecuredRoute from "./SecuredRoute";
+import { routes } from "./routesArray";
 
 const Routes = () => {
-  const routes = [
-    { path: "/", name: "Landing", Component: AllCamps },
-    { path: "/campgrounds/:id", name: "Detail", Component: Detail },
-    { path: "/register", name: "register", Component: UserRegister },
-    { path: "/login", name: "login", Component: UserLogin },
-  ];
+  const nonModalRoutes = routes.filter(({ modal }) => !modal);
+  console.log(nonModalRoutes);
+  const routesArray = nonModalRoutes.map(
+    ({ path, Component, name, modal, secured }) =>
+      secured ? (
+        <SecuredRoute
+          path={path}
+          Component={Component}
+          key={name}
+          secured={secured}
+          modal={modal}
+          exact
+        ></SecuredRoute>
+      ) : (
+        <Route
+          key={name}
+          component={Component}
+          path={path}
+          secured={secured}
+          modal={modal}
+          exact
+        />
+      )
+  );
 
-  return routes.map(({ path, Component, name }) => (
-    <Route key={name} component={Component} path={path} exact></Route>
-  ));
+  return routesArray;
 };
 
 export default Routes;

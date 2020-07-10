@@ -3,3 +3,6 @@ export const CLEAR_ERRORS = "CLEAR_ERRORS";
 
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
 export const LOGOUT_USER = "LOGOUT_USER";
+export const TOGGLE_LOGIN = "TOGGLE_LOGIN";
+export const TOGGLE_REGISTER = "TOGGLE_REGISTER";
+export const TOGGLE_NEW_CAMP = "TOGGLE_NEW_CAMP";

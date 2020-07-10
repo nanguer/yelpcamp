@@ -38,6 +38,7 @@ export const fetchOne = (id) => async (dispatch) => {
   if (!fetchedItem) {
     try {
       const res = await api.campground().fetchById(id);
+
       dispatch({
         type: ACTION_TYPES.FETCH_ONE,
         payload: res.data,
@@ -58,20 +59,19 @@ export const fetchOne = (id) => async (dispatch) => {
   }
 };
 
-// export const create = (data, onSuccess) => (dispatch) => {
-//   data = formatData(data);
-//   api
-//     .dCandidate()
-//     .create(data)
-//     .then((res) => {
-//       dispatch({
-//         type: ACTION_TYPES.CREATE,
-//         payload: res.data,
-//       });
-//       onSuccess();
-//     })
-//     .catch((err) => console.log(err));
-// };
+export const create = (data, onSuccess) => (dispatch) => {
+  api
+    .campground()
+    .create(data)
+    .then((res) => {
+      dispatch({
+        type: ACTION_TYPES.CREATE,
+        payload: res.data,
+      });
+      onSuccess();
+    })
+    .catch((err) => console.log(err));
+};
 
 // export const update = (id, data, onSuccess) => (dispatch) => {
 //   data = formatData(data);

@@ -1,38 +1,68 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import * as actions from "../../actions/campgrounds";
 import PropTypes from "prop-types";
 import Preview from "./Preview";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
 
 export const AllCampgrounds = ({
   fetchAllCampgrounds,
   campgrounds,
   fetchCampDetails,
+  dispatch,
+
+  ...props
 }) => {
   useEffect(() => {
     fetchAllCampgrounds();
   }, [fetchAllCampgrounds]);
 
+  // const handleAddCamp = async (dispatch) => {
+  //   if (!isAuthenticated) {
+  //     addToast("Please Login First", {
+  //       appearance: "error",
+  //       autoDismiss: true,
+  //     });
+  //     dispatch({ type: TOGGLE_LOGIN });
+  //   } else {
+  //     dispatch({ type: TOGGLE_NEW_CAMP });
+  //   }
+  // };
+
   return (
-    <div>
-      <ul>
+    <Container>
+      <Button
+        variant="primary"
+        onClick={() => props.history.push("/new-campground")}
+      >
+        Add New Campground
+      </Button>
+
+      <Row className="text-center">
         {campgrounds.map((campground) => (
-          <li key={campground._id}>
-            <Preview
-              campground={campground}
-              fetchCampDetails={fetchCampDetails}
-            />
-          </li>
+          <Preview
+            key={campground._id}
+            campground={campground}
+            fetchCampDetails={fetchCampDetails}
+          />
         ))}
-      </ul>
-    </div>
+      </Row>
+    </Container>
   );
 };
 const mapStateToProps = (state) => ({
   campgrounds: state.campgrounds.list,
 });
-const mapActionsToProps = {
-  fetchAllCampgrounds: actions.fetchAll,
+const fetchAllCampgrounds = actions.fetchAll;
+
+const mapActionsToProps = (dispatch) => {
+  return {
+    dispatch,
+    ...bindActionCreators({ fetchAllCampgrounds }, dispatch),
+  };
 };
 
 AllCampgrounds.propTypes = {

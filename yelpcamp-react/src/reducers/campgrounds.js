@@ -5,7 +5,7 @@ const initialState = {
   viewing: {},
 };
 export const campgrounds = (state = initialState, action) => {
-  const { FETCH_ALL, FETCH_ONE } = ACTION_TYPES;
+  const { FETCH_ALL, FETCH_ONE, CREATE } = ACTION_TYPES;
 
   switch (action.type) {
     case FETCH_ALL:
@@ -18,11 +18,11 @@ export const campgrounds = (state = initialState, action) => {
         ...state,
         viewing: { ...action.payload },
       };
-    // case CREATE:
-    //   return {
-    //     ...state,
-    //     list: [...state.list, action.payload],
-    //   };
+    case CREATE:
+      return {
+        ...state,
+        list: [...state.list, action.payload],
+      };
     // case UPDATE:
     //   return {
     //     ...state,
