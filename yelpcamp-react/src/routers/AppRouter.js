@@ -1,9 +1,9 @@
-import React from "react";
-import { BrowserRouter as Router, Switch } from "react-router-dom";
-import Routes from "./routes";
-import ModalRoutes from "./ModalRoute";
-import { connect } from "react-redux";
-import Navigation from "../components/Navigation/Navigation";
+import React from 'react';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import Routes from './routes';
+import ModalRoutes from './ModalRoute';
+import { connect } from 'react-redux';
+import Navigation from '../components/Navigation/Navigation';
 
 const AppRouter = () => {
   return (

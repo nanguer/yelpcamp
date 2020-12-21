@@ -1,15 +1,15 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { store } from "./store";
-import { Provider } from "react-redux";
-import AppRouter from "./routers/AppRouter";
-import { ToastProvider } from "react-toast-notifications";
-import setAuthToken from "./setAuthToken";
-import jwt_decode from "jwt-decode";
-import * as serviceWorker from "./serviceWorker";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { store } from './store';
+import { Provider } from 'react-redux';
+import AppRouter from './routers/AppRouter';
+import { ToastProvider } from 'react-toast-notifications';
+import setAuthToken from './setAuthToken';
+import jwt_decode from 'jwt-decode';
+import * as serviceWorker from './serviceWorker';
 
-import "./styles/styles.scss";
-import { SET_CURRENT_USER, LOGOUT_USER } from "./actions/types";
+import './styles/styles.scss';
+import { SET_CURRENT_USER, LOGOUT_USER } from './actions/types';
 
 if (localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken);
@@ -21,7 +21,7 @@ if (localStorage.jwtToken) {
     store.dispatch({
       type: LOGOUT_USER,
     });
-    window.Location.href = "/";
+    window.Location.href = '/';
   }
 }
 
@@ -32,7 +32,7 @@ ReactDOM.render(
     </ToastProvider>
   </Provider>,
 
-  document.getElementById("root")
+  document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change

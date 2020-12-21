@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import { registerUser, clearErrors } from "../../actions/user";
-import classnames from "classnames";
-import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import useForm from "../Hooks/useForm";
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { registerUser, clearErrors } from '../../actions/user';
+import classnames from 'classnames';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import useForm from '../Hooks/useForm';
 
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
 const UserRegister = ({ registerUser, clearErrors, ...props }) => {
   const [state, setState] = useState({
-    username: "",
-    email: "",
-    password: "",
-    password_confirm: "",
+    username: '',
+    email: '',
+    password: '',
+    password_confirm: '',
     errors: {},
   });
 
@@ -31,6 +31,7 @@ const UserRegister = ({ registerUser, clearErrors, ...props }) => {
   );
 
   const handleInputChange = (e) => {
+    clearErrors();
     setState({
       ...state,
       [e.target.name]: e.target.value,
@@ -50,7 +51,6 @@ const UserRegister = ({ registerUser, clearErrors, ...props }) => {
     submitData(user);
   };
   const handleCloseModal = () => {
-    console.log(props.history);
     props.history.goBack();
   };
 
@@ -81,8 +81,8 @@ const UserRegister = ({ registerUser, clearErrors, ...props }) => {
                 name="username"
                 onChange={handleInputChange}
                 value={state.username}
-                className={classnames("form-control", {
-                  "is-invalid": errors.username,
+                className={classnames('form-control', {
+                  'is-invalid': errors.username,
                 })}
               />
               {errors.username && (
@@ -99,8 +99,8 @@ const UserRegister = ({ registerUser, clearErrors, ...props }) => {
                 name="email"
                 onChange={handleInputChange}
                 value={state.email}
-                className={classnames("form-control", {
-                  "is-invalid": errors.email,
+                className={classnames('form-control', {
+                  'is-invalid': errors.email,
                 })}
               />
               {errors.email && (
@@ -117,8 +117,8 @@ const UserRegister = ({ registerUser, clearErrors, ...props }) => {
                 name="password"
                 onChange={handleInputChange}
                 value={state.password}
-                className={classnames("form-control", {
-                  "is-invalid": errors.password,
+                className={classnames('form-control', {
+                  'is-invalid': errors.password,
                 })}
               />
               {errors.password && (
@@ -127,7 +127,7 @@ const UserRegister = ({ registerUser, clearErrors, ...props }) => {
                 </Form.Control.Feedback>
               )}
             </Form.Group>
-            <Form.Group controlId="formBasicPassword">
+            <Form.Group controlId="formBasicPasswordConfirm">
               <Form.Label>Confirm Password</Form.Label>
               <Form.Control
                 type="password"
@@ -135,8 +135,8 @@ const UserRegister = ({ registerUser, clearErrors, ...props }) => {
                 name="password_confirm"
                 onChange={handleInputChange}
                 value={state.password_confirm}
-                className={classnames("form-control", {
-                  "is-invalid": errors.password_confirm,
+                className={classnames('form-control', {
+                  'is-invalid': errors.password_confirm,
                 })}
               />
               {errors.password_confirm && (
@@ -147,15 +147,15 @@ const UserRegister = ({ registerUser, clearErrors, ...props }) => {
             </Form.Group>
             <div>
               <Button variant="primary" type="submit" disabled={submitting}>
-                {submitting ? "Loading..." : "Sign Up!"}
+                {submitting ? 'Loading...' : 'Sign Up!'}
               </Button>
             </div>
           </Form>
         </div>
       </Modal.Body>
       <Modal.Footer>
-        {submitting && "Please Wait..."}
-        {submitError && "Something Went Wrong, please try again."}
+        {submitting && 'Please Wait...'}
+        {submitError && 'Something Went Wrong, please try again.'}
       </Modal.Footer>
     </Modal>
   );

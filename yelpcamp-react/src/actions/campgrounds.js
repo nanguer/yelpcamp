@@ -1,12 +1,12 @@
-import api from "./api";
-import { SET_ERROR } from "./types";
+import api from './api';
+import { SET_ERROR } from './types';
 
 export const ACTION_TYPES = {
-  CREATE: "CREATE",
-  UPDATE: "UPDATE",
-  DELETE: "DELETE",
-  FETCH_ALL: "FETCH_ALL",
-  FETCH_ONE: "FETCH_ONE",
+  CREATE: 'CREATE',
+  UPDATE: 'UPDATE',
+  DELETE: 'DELETE',
+  FETCH_ALL: 'FETCH_ALL',
+  FETCH_ONE: 'FETCH_ONE',
 };
 
 const getItemsFromLocal = (id) => {

@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 const useForm = (logicToServer, initialValues) => {
   const [submitting, setSubmitting] = useState(false);
-  const [submitError, setSubmitError] = useState("");
+  const [submitError, setSubmitError] = useState('');
   const [values, setValues] = useState(initialValues);
 
   const handleInputChange = (e) => {
@@ -20,6 +20,7 @@ const useForm = (logicToServer, initialValues) => {
     if (response === 500) {
       setSubmitError(response.data);
     }
+
     return response;
   };
 

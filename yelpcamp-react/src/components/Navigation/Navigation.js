@@ -1,34 +1,34 @@
-import React from "react";
-import { bindActionCreators } from "redux";
-import { NavLink } from "react-router-dom";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import { connect } from "react-redux";
-import { logoutUser } from "../../actions/user";
-import { toggleLogin } from "../../actions/modals";
-import { useToasts } from "react-toast-notifications";
-import PropTypes from "prop-types";
+import React from 'react';
+import { bindActionCreators } from 'redux';
+import { NavLink } from 'react-router-dom';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import { connect } from 'react-redux';
+import { logoutUser } from '../../actions/user';
+import { toggleLogin } from '../../actions/modals';
+import { useToasts } from 'react-toast-notifications';
+import PropTypes from 'prop-types';
 
-const Navigation = ({ auth, logoutUser, toggleLogin, dispatch, ...props }) => {
-  const { name } = auth.user;
+const Navigation = ({ auth, logoutUser }) => {
+  const { username } = auth.user;
   const { isAuthenticated } = auth;
   const { addToast } = useToasts();
   // useEffect(() => {
-  //   console.log(props);
-  // }, [props]);
+  //   toggleLogin();
+  // }, []);
 
   const onLogout = (e) => {
     e.preventDefault();
     logoutUser();
     addToast(`Logged out`, {
-      appearance: "info",
+      appearance: 'info',
       autoDismiss: true,
     });
   };
 
   const authLinks = (
     <Nav>
-      <Navbar.Text className="username">Welcome {name} </Navbar.Text>
+      <Navbar.Text className="username">Welcome {username} </Navbar.Text>
       <Nav.Link href="#" eventKey="3" onClick={onLogout}>
         Logout
       </Nav.Link>
@@ -65,7 +65,7 @@ const Navigation = ({ auth, logoutUser, toggleLogin, dispatch, ...props }) => {
         eventKey="7"
         exact
         activeClassName="active pull-left"
-        to={"/"}
+        to={'/'}
       >
         YelpCamp
       </Nav.Link>
